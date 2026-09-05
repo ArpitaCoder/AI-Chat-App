@@ -21,9 +21,18 @@ app.get("/",(req,res)=>{
 app.post("/api/chat/",async(req,res)=>{
     // console.log(req.body.message);
     try{
+        const geminiHistory=(req.body.history || []).map((msg)=>({
+            role: msg.role === "ai"? "model":"user",
+            parts: [{ text: msg.text }]
+        }))
+        geminiHistory.push({
+            role:"user",
+            parts:[{text: req.body.message}]
+        })
+
         const response = await ai.models.generateContent({
             model: "gemini-3.6-flash",
-            contents: "Explain apple in one sentence."
+            contents: geminiHistory
         })
 
         res.json({
