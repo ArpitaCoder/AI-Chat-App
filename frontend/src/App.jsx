@@ -43,9 +43,10 @@ function App() {
     finally{
       setLoading(false);
     }
-    
-
   }
+  const clearChat =()=>{
+      setMessages([]);
+    }
   const handleKeyDown = (e)=>{
     if(e.key==="Enter"){
       connectBackend();
@@ -57,6 +58,7 @@ function App() {
     <input type="text" placeholder='Type your message...' value={input} onChange={(e)=>setInput(e.target.value) } onKeyDown= {handleKeyDown} />
 
     <button onClick = {connectBackend} disabled={loading}>{loading ?"Thinking... ":"Send"}</button>
+    <button onClick={clearChat}>Clear Chat</button>
     <div>
       {messages.map((msg,index)=>(
         <p key={index}>
