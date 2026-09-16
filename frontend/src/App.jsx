@@ -1,6 +1,9 @@
 
 import { useState } from 'react'
-import './App.css'
+import ChatInput from './components/ChatInput';
+import ChatWindow from './components/ChatWindow';
+// ReactMarkdown- takes the text returned by Gemini and converts Markdown into proper HTML/UI elements.
+// import "tailwindcss";
 
 function App() {
   const [messages,setMessages] = useState([]);
@@ -25,7 +28,6 @@ function App() {
       const data = await response.json();
 
       setMessages((prev) => [
-        ...prev,
         {
           role: "user",
           text: input,
@@ -33,7 +35,8 @@ function App() {
         {
           role: "ai",
           text: data.message,
-        }
+        },
+        ...prev
       ]);
       setInput("")
       setLoading(false)
@@ -54,18 +57,15 @@ function App() {
   }
    return(
     <>
-    <h1>My AI project</h1>
-    <input type="text" placeholder='Type your message...' value={input} onChange={(e)=>setInput(e.target.value) } onKeyDown= {handleKeyDown} />
-
-    <button onClick = {connectBackend} disabled={loading}>{loading ?"Thinking... ":"Send"}</button>
-    <button onClick={clearChat}>Clear Chat</button>
-    <div>
-      {messages.map((msg,index)=>(
-        <p key={index}>
-          <strong>{msg.role}:</strong>{msg.text}
-        </p>
-      ))}
+    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-900 text-white p-6">
+      
+      <h1 className="text-4xl font-bold mb-2">AI Chat Assistant</h1>
+      <ChatInput input={input} setInput={setInput} handleKeyDown={handleKeyDown} connectBackend={connectBackend} clearChat={clearChat} loading={loading} />
+      <ChatWindow messages={messages} />
     </div>
+    
+
+    
     </>
     
    )

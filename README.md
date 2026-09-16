@@ -1,4 +1,4 @@
-<h1 align="center">AI-Chat-App 🤖</h1>
+<h1 align="center">AI-Chat-App </h1>
 
 <p align="center">
   A simple AI chat application built using React, Node.js, Express and Google Gemini.
@@ -132,17 +132,6 @@ The Gemini API key is stored in the backend <code>.env</code> file. The key shou
   <li>Managing chat messages using React state</li>
   <li>Connecting a web application with the Gemini API</li>
   <li>Using environment variables to protect API keys</li>
-</ul>
-
-<h2> Future Improvements</h2>
-
-<ul>
-  <li>Better chat UI</li>
-  <li>Save previous conversations</li>
-  <li>User authentication</li>
-  <li>Markdown support for AI responses</li>
-  <li>Streaming responses</li>
-  <li>File and image support</li>
 </ul>
 
 <h2> Tags</h2>
